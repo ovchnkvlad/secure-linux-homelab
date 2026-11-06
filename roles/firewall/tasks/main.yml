@@ -1,0 +1,33 @@
+---
+- name: Install UFW
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+
+- name: Set the default incoming policy
+  community.general.ufw:
+    direction: incoming
+    policy: deny
+
+- name: Set the default outgoing policy
+  community.general.ufw:
+    direction: outgoing
+    policy: allow
+
+- name: Allow SSH before enabling the firewall
+  community.general.ufw:
+    rule: allow
+    port: "{{ homelab_ssh_port }}"
+    proto: tcp
+
+- name: Allow explicitly configured TCP services
+  community.general.ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop: "{{ homelab_allowed_tcp_ports }}"
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+

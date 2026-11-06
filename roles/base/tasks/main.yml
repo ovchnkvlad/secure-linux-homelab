@@ -1,0 +1,48 @@
+---
+- name: Update the APT package cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install baseline administration packages
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - git
+      - sudo
+      - unattended-upgrades
+    state: present
+
+- name: Set the system timezone
+  community.general.timezone:
+    name: "{{ homelab_timezone }}"
+
+- name: Create the generic administration account
+  ansible.builtin.user:
+    name: "{{ homelab_admin_user }}"
+    groups: "{{ homelab_admin_groups }}"
+    append: true
+    create_home: true
+    shell: /bin/bash
+    password_lock: true
+    state: present
+
+- name: Add an environment-supplied SSH public key
+  ansible.posix.authorized_key:
+    user: "{{ homelab_admin_user }}"
+    key: "{{ homelab_admin_public_key }}"
+    state: present
+  when: homelab_admin_public_key | length > 0
+
+- name: Configure automatic security updates
+  ansible.builtin.copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+  when: homelab_enable_automatic_updates | bool
+

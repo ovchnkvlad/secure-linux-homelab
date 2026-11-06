@@ -1,0 +1,21 @@
+---
+# Generic learning-lab identity. It is not a personal or production username.
+homelab_admin_user: opsadmin
+homelab_admin_groups:
+  - sudo
+
+# Keep empty in Git. Supply a public key at runtime when targeting a real VM.
+# Public keys are not secrets, but environment-specific identity data should not
+# be stored in this educational repository.
+homelab_admin_public_key: ""
+
+homelab_timezone: Etc/UTC
+homelab_ssh_port: 22
+homelab_allowed_tcp_ports: []
+
+homelab_enable_automatic_updates: true
+homelab_enable_ssh_hardening: true
+homelab_enable_firewall: true
+homelab_enable_fail2ban: true
+homelab_enable_auditd: true
+

@@ -1,0 +1,23 @@
+---
+- name: Install Linux auditing tools
+  ansible.builtin.apt:
+    name:
+      - auditd
+      - audispd-plugins
+    state: present
+
+- name: Install baseline audit rules
+  ansible.builtin.template:
+    src: homelab.rules.j2
+    dest: /etc/audit/rules.d/homelab.rules
+    owner: root
+    group: root
+    mode: "0640"
+  notify: Restart auditd
+
+- name: Enable the audit service
+  ansible.builtin.service:
+    name: auditd
+    enabled: true
+    state: started
+

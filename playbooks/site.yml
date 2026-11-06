@@ -1,0 +1,24 @@
+---
+- name: Configure and harden the Linux homelab
+  hosts: homelab
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: Verify the target is a supported Debian-family system
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.os_family == "Debian"
+        fail_msg: "This learning project currently supports Debian and Ubuntu only."
+
+  roles:
+    - role: base
+    - role: ssh_hardening
+      when: homelab_enable_ssh_hardening | bool
+    - role: firewall
+      when: homelab_enable_firewall | bool
+    - role: fail2ban
+      when: homelab_enable_fail2ban | bool
+    - role: auditd
+      when: homelab_enable_auditd | bool
+

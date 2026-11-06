@@ -1,0 +1,12 @@
+# Managed by Ansible. Local edits will be overwritten.
+[DEFAULT]
+bantime = 15m
+findtime = 10m
+maxretry = 5
+banaction = ufw
+
+[sshd]
+enabled = true
+port = {{ homelab_ssh_port }}
+backend = systemd
+

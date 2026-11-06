@@ -1,0 +1,15 @@
+---
+- name: Install the OpenSSH server
+  ansible.builtin.apt:
+    name: openssh-server
+    state: present
+
+- name: Install the managed SSH hardening configuration
+  ansible.builtin.template:
+    src: 99-homelab-hardening.conf.j2
+    dest: /etc/ssh/sshd_config.d/99-homelab-hardening.conf
+    owner: root
+    group: root
+    mode: "0600"
+  notify: Validate and restart SSH
+

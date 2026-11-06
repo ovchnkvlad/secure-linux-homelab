@@ -1,0 +1,9 @@
+---
+# This inventory exists for static checks only. The playbook is intentionally
+# not executed against the workstation. Vagrant generates a temporary inventory
+# for the disposable lab VM.
+homelab:
+  hosts:
+    syntax-check-only:
+      ansible_connection: local
+
