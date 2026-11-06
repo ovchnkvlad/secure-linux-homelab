@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ENV["ANSIBLE_COLLECTIONS_PATH"] = File.expand_path(".ansible/collections", __dir__)
+
 Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-24.04"
   config.vm.hostname = "secure-linux-homelab"
@@ -17,7 +19,6 @@ Vagrant.configure("2") do |config|
         "homelab" => ["homelab"]
       }
       ansible.compatibility_mode = "2.0"
-      ansible.galaxy_role_file = "requirements.yml"
     end
   end
 end
