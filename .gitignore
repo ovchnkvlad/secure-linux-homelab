@@ -1,0 +1,26 @@
+.DS_Store
+.idea/
+.vscode/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local infrastructure state
+.vagrant/
+.ansible/
+*.retry
+
+# Credentials and local overrides
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*vault-password*
+inventory/production*
+group_vars/**/vault.yml
+host_vars/**/vault.yml
+
