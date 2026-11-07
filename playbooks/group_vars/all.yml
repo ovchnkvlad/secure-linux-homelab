@@ -18,4 +18,3 @@ homelab_enable_ssh_hardening: true
 homelab_enable_firewall: true
 homelab_enable_fail2ban: true
 homelab_enable_auditd: true
-

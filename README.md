@@ -40,9 +40,8 @@ decisions.
 .
 ├── .github/workflows/       # CI quality and secret checks
 ├── docs/                    # Architecture and operational runbook
-├── group_vars/              # Safe, generic defaults
 ├── inventory/               # Static-check inventory only
-├── playbooks/               # Ansible entry points
+├── playbooks/               # Ansible entry points and safe defaults
 ├── roles/                   # Independent hardening controls
 ├── Vagrantfile              # Disposable Ubuntu VM
 └── requirements.yml         # Required Ansible collections
