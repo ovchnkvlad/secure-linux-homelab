@@ -110,6 +110,9 @@ make verify
 The detailed recovery and troubleshooting procedures are in
 [the operations runbook](docs/runbook.md).
 
+The latest local integration results, including the zero-change idempotency run, are
+recorded in [the validation evidence](docs/validation.md).
+
 ## Security decisions
 
 | Risk | Control |
